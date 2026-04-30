@@ -1,314 +1,176 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML5 Forms | Clase interactiva</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#f97316',
-                        dark: '#1E293B',
-                        light: '#F5F7FA'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .section-title {
-                @apply text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4;
-            }
-            .card {
-                @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300;
-            }
-            .btn {
-                @apply px-6 py-2.5 rounded-md font-medium transition-all duration-300;
-            }
-            .btn-primary {
-                @apply bg-primary text-white hover:bg-primary/90;
-            }
-            .btn-outline {
-                @apply border border-primary text-primary hover:bg-primary hover:text-white;
-            }
-            .tab-active {
-                @apply bg-primary text-white;
-            }
-            .tab-inactive {
-                @apply bg-gray-800 text-white;
-            }
-            .code-block {
-                @apply bg-gray-900 text-gray-100 p-5 rounded-lg font-mono text-sm overflow-x-auto;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML5 Forms | Clase interactiva</title>
 
-    <style>
-        body {
-            background-color: #ffffff;
-            font-family: sans-serif;
-        }
-        .demo-form-card {
-            background: white;
-            border-radius: 30px;
-            padding: 28px;
-            box-shadow: 0 18px 45px rgba(0,0,0,0.22);
-        }
-        .bg-orange-gradient {
-            background: linear-gradient(180deg, #f97316 0%, #fb923c 100%);
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 11px;
-        }
-        label {
-            font-weight: bold;
-            color: #333;
-        }
-        input {
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            outline: none;
-            transition: border 0.3s;
-        }
-        input:focus {
-            border-color: #f97316;
-        }
-        button {
-            padding: 14px;
-            background-color: #f97316;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #ea580c;
-        }
-        #resultado {
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            background-color: #fef2f2;
-        }
-        .nav-button {
-            border-radius: 9999px;
-            padding: 8px 16px;
-            background-color: #374151;
-            color: white;
-            transition: background-color 0.3s;
-        }
-        .nav-button:hover {
-            background-color: #4b5563;
-        }
-    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#f97316',
+        dark: '#1E293B',
+        light: '#F5F7FA'
+      }
+    }
+  }
+}
+</script>
+
+<style>
+body{
+  background:#fff;
+  font-family:sans-serif;
+}
+
+.demo-form-card{
+  background:white;
+  border-radius:30px;
+  padding:28px;
+  box-shadow:0 18px 45px rgba(0,0,0,0.22);
+}
+
+input{
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  width:100%;
+  margin-bottom:10px;
+}
+
+label{
+  font-weight:bold;
+}
+
+button{
+  padding:12px;
+  background:#f97316;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  width:100%;
+}
+
+button:hover{
+  background:#ea580c;
+}
+
+#resultado{
+  margin-top:10px;
+  padding:15px;
+  border-radius:10px;
+  background:#fef2f2;
+}
+nav a{
+  padding:8px 12px;
+  background:#374151;
+  border-radius:20px;
+}
+</style>
+
 </head>
-<body class="bg-light min-h-screen flex flex-col">
-    <!-- Navegación -->
-    <nav class="bg-gray-800 text-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center gap-3 mb-4 md:mb-0">
-                <div class="bg-white text-primary font-bold text-4xl w-16 h-16 rounded-lg flex items-center justify-center">5</div>
-                <div>
-                    <h1 class="text-2xl font-bold">HTML5 Forms</h1>
-                    <p class="text-gray-300 text-sm">Clase interactiva</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap justify-center gap-x-3 gap-y-2">
-                <a href="#inicio" class="nav-button">Inicio</a>
-                <a href="#datos" class="nav-button">Datos</a>
-                <a href="#teoria" class="nav-button">Teoría</a>
-                <a href="#etiquetas" class="nav-button">Etiquetas</a>
-                <a href="#tipos" class="nav-button">Tipos</a>
-                <a href="#demo" class="nav-button">Demo</a>
-                <a href="#codigo" class="nav-button">Código</a>
-                <a href="#actividad" class="nav-button">Actividad</a>
-            </div>
-        </div>
-    </nav>
 
-    <main class="container mx-auto px-4 py-8 flex-grow">
-        <!-- Sección Inicio -->
-        <section id="inicio" class="mb-20 text-center">
-            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-primary mb-4">Formularios en HTML5</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">Aprende a crear formularios modernos, validar campos y mostrar información con JavaScript sin usar base de datos.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#datos" class="btn btn-primary">Iniciar clase</a>
-                <a href="#demo" class="btn btn-outline">Ver ejemplo</a>
-            </div>
-        </section>
+<body class="bg-light">
 
-        <!-- Sección Datos -->
-        <section id="datos" class="mb-20 scroll-mt-20">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">01</div>
-                <h2 class="section-title !mb-0">Datos de la clase</h2>
-            </div>
-            <p class="text-gray-600 mb-6">Información formal de la actividad que se trabajará durante la sesión.</p>
-            
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                <div class="card border-l-4 border-primary">
-                    <h3 class="text-xl font-semibold text-primary mb-3">Propósito de la clase</h3>
-                    <p class="text-gray-700">Desarrollar en el estudiante la capacidad de crear formularios en HTML5, aplicando campos de entrada, etiquetas, validaciones básicas y uso de JavaScript para mostrar información dentro de una página web.</p>
-                </div>
-                <div class="card border-l-4 border-primary">
-                    <h3 class="text-xl font-semibold text-primary mb-3">Resultados de aprendizaje</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1">
-                        <li>Identificar las etiquetas principales de un formulario.</li>
-                        <li>Crear campos de texto, número, correo y comentario.</li>
-                        <li>Validar campos vacíos con JavaScript.</li>
-                        <li>Mostrar datos ingresados por el usuario.</li>
-                    </ul>
-                </div>
-                <div class="card border-l-4 border-primary">
-                    <h3 class="text-xl font-semibold text-primary mb-3">Producto esperado</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1">
-                        <li>Página web con formulario funcional.</li>
-                        <li>Formulario con mínimo 6 campos.</li>
-                        <li>Diseño con CSS.</li>
-                        <li>Validación y resultado en pantalla.</li>
-                    </ul>
-                </div>
-                <div class="card border-l-4 border-primary">
-                    <h3 class="text-xl font-semibold text-primary mb-3">Competencias</h3>
-                    <ul class="list-disc list-inside text-gray-700 space-y-1">
-                        <li>Organización de contenido con HTML5.</li>
-                        <li>Uso de tecnologías digitales.</li>
-                        <li>Aplicación de estilos con CSS.</li>
-                        <li>Interacción básica con JavaScript.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card border-l-4 border-primary">
-                <h3 class="text-xl font-semibold text-primary mb-3">Recursos</h3>
-                <ul class="list-disc list-inside text-gray-700 space-y-1">
-                    <li>Visual Studio Code.</li>
-                    <li>Navegador web.</li>
-                    <li>HTML5, CSS y JavaScript.</li>
-                    <li>GitHub para guardar el proyecto.</li>
-                </ul>
-            </div>
-        </section>
+<!-- NAV -->
 
-        <!-- Sección Teoría -->
-        <section id="teoria" class="mb-20 scroll-mt-20">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">02</div>
-                <h2 class="section-title !mb-0">¿Qué es un formulario?</h2>
-            </div>
-            <p class="text-gray-600 mb-6">Un formulario permite que el usuario ingrese información dentro de una página web.</p>
+<nav class="bg-gray-800 text-white p-4 flex justify-center gap-3 flex-wrap">
+<a href="#inicio">Inicio</a>
+<a href="#demo">Demo</a>
+<a href="#codigo">Código</a>
+<a href="#actividad">Actividad</a>
+</nav>
 
-            <div class="grid md:grid-cols-3 gap-6 mb-8">
-                <div class="card text-center border-t-4 border-primary">
-                    <div class="text-4xl text-primary mb-3">
-                        <i class="fa fa-pencil-square-o"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">Captura datos</h3>
-                    <p class="text-gray-700">Permite pedir información como nombre, edad, correo, grupo, teléfono o comentarios.</p>
-                </div>
-                <div class="card text-center border-t-4 border-primary">
-                    <div class="text-4xl text-primary mb-3">
-                        <i class="fa fa-check-square-o"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">Valida información</h3>
-                    <p class="text-gray-700">Revisa que los campos no estén vacíos y que el usuario escriba datos correctos.</p>
-                </div>
-                <div class="card text-center border-t-4 border-primary">
-                    <div class="text-4xl text-primary mb-3">
-                        <i class="fa fa-bolt"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold mb-2">Usa JavaScript</h3>
-                    <p class="text-gray-700">JavaScript puede leer lo que escribió el usuario y mostrarlo dentro de la página.</p>
-                </div>
-            </div>
+<!-- INICIO -->
 
-            <div class="card">
-                <h3 class="text-xl font-semibold text-primary mb-3">Estructura básica de un formulario</h3>
-                <div class="code-block">
-<pre>
-&lt;form&gt;
-  &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
-  &lt;input type="text" id="nombre"&gt;
+<section id="inicio" class="text-center p-10">
+<h1 class="text-4xl font-bold text-orange-500">Formularios en HTML5</h1>
+<p>Aprende a crear formularios con validación y JavaScript</p>
+</section>
 
-  &lt;button type="button"&gt;Enviar&lt;/button&gt;
-&lt;/form&gt;
+<!-- DEMO -->
+
+<section id="demo" class="p-10">
+<h2 class="text-2xl font-bold mb-4 text-orange-500">Demo</h2>
+
+<div class="demo-form-card max-w-md mx-auto">
+<form>
+
+<label>Nombre</label> <input type="text" id="nombre">
+
+<label>Correo</label> <input type="email" id="correo">
+
+<label>Edad</label> <input type="number" id="edad">
+
+<button type="button" onclick="mostrarDatos()">Enviar</button>
+
+</form>
+
+<div id="resultado"></div>
+</div>
+</section>
+
+<!-- CODIGO -->
+
+<section id="codigo" class="p-10">
+<h2 class="text-2xl font-bold mb-4 text-orange-500">Código</h2>
+
+<pre style="background:#111;color:#0f0;padding:20px;border-radius:10px;">
+function mostrarDatos(){
+ let nombre = document.getElementById("nombre").value;
+ let correo = document.getElementById("correo").value;
+ let edad = document.getElementById("edad").value;
+
+ if(nombre==="" || correo==="" || edad===""){
+   document.getElementById("resultado").innerHTML="⚠️ Llena todos los campos";
+   return;
+ }
+
+ document.getElementById("resultado").innerHTML =
+ "Nombre: "+nombre+"<br>"+
+ "Correo: "+correo+"<br>"+
+ "Edad: "+edad;
+}
 </pre>
-                </div>
-            </div>
-        </section>
 
-        <!-- Sección Etiquetas -->
-        <section id="etiquetas" class="mb-20 scroll-mt-20">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">03</div>
-                <h2 class="section-title !mb-0">Etiquetas principales</h2>
-            </div>
-            <p class="text-gray-600 mb-6">Estas etiquetas son la base para construir formularios en HTML5.</p>
+</section>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="card">
-                    <h3 class="text-lg font-semibold text-primary mb-2">&lt;form&gt;</h3>
-                    <p class="text-gray-700">Contenedor principal del formulario.</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-lg font-semibold text-primary mb-2">&lt;label&gt;</h3>
-                    <p class="text-gray-700">Indica qué dato debe escribir el usuario.</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-lg font-semibold text-primary mb-2">&lt;input&gt;</h3>
-                    <p class="text-gray-700">Crea campos para escribir texto, números, correo o contraseña.</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-lg font-semibold text-primary mb-2">&lt;textarea&gt;</h3>
-                    <p class="text-gray-700">Permite escribir comentarios o textos largos.</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-lg font-semibold text-primary mb-2">&lt;select&gt;</h3>
-                    <p class="text-gray-700">Crea una lista desplegable de opciones.</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-lg font-semibold text-primary mb-2">&lt;button&gt;</h3>
-                    <p class="text-gray-700">Ejecuta una acción al presionarlo.</p>
-                </div>
-            </div>
-        </section>
+<!-- ACTIVIDAD -->
 
-        <!-- Sección Tipos de Input -->
-        <section id="tipos" class="mb-20 scroll-mt-20">
-            <div class="flex items-center gap-4 mb-6">
-                <div class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">04</div>
-                <h2 class="section-title !mb-0">Tipos de input</h2>
-            </div>
-            <p class="text-gray-600 mb-6">HTML5 incluye varios tipos de campos según el dato que se necesita.</p>
+<section id="actividad" class="p-10">
+<h2 class="text-2xl font-bold mb-4 text-orange-500">Actividad</h2>
 
-            <div class="card overflow-x-auto">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr class="bg-primary/10">
-                            <th class="border border-gray-200 px-4 py-3 text-left">Tipo</th>
-                            <th class="border border-gray-200 px-4 py-3 text-left">Uso</th>
-                            <th class="border border-gray-200 px-4 py-3 text-left">Ejemplo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border border-gray-200 px-4 py-3 font-medium">text</td>
-                            <td class="border border-gray-200 px-4 py-3">Texto normal</td>
-                            <td class="border border-gray-200 px-4 py-3 font-mono
-                                
+<ul class="list-disc ml-6">
+<li>Crear un formulario con mínimo 6 campos</li>
+<li>Validar que no estén vacíos</li>
+<li>Mostrar los datos en pantalla</li>
+</ul>
+
+</section>
+
+<script>
+function mostrarDatos(){
+ let nombre = document.getElementById("nombre").value;
+ let correo = document.getElementById("correo").value;
+ let edad = document.getElementById("edad").value;
+
+ if(nombre==="" || correo==="" || edad===""){
+   document.getElementById("resultado").innerHTML="⚠️ Llena todos los campos";
+   return;
+ }
+
+ document.getElementById("resultado").innerHTML =
+ "Nombre: "+nombre+"<br>"+
+ "Correo: "+correo+"<br>"+
+ "Edad: "+edad;
+}
+</script>
+
+</body>
+</html>
