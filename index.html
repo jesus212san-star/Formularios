@@ -4,16 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Datos</title>
+
     <style>
-        /* Nuevos Estilos - Tema Oscuro/Naranja */
+        /* VIDEO DE FONDO */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        /* CAPA OSCURA SOBRE EL VIDEO */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* ESTILOS GENERALES */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #121212;
             padding: 40px;
             margin: 0;
         }
 
         .demo-form-card {
+            position: relative;
+            z-index: 1;
             background-color: #1e1e1e;
             padding: 35px;
             border-radius: 12px;
@@ -96,7 +121,14 @@
         }
     </style>
 </head>
+
 <body>
+
+<!-- VIDEO DE FONDO -->
+<video autoplay muted loop id="bg-video">
+    <source src="Relaxing Frog Animation _ Peaceful Pond Aesthetic with Calming Piano Music(MP4).mp4" type="video/mp4">
+    Tu navegador no soporta videos.
+</video>
 
 <section class="demo-form-card">
   <h3>Formulario de Datos</h3>
